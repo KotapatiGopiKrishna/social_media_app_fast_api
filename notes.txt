@@ -1,0 +1,155 @@
+
+Data migration Tools:
+1. Alembic :
+	which allows to make incremental changes to our database schema to track changes and get just like we can  with our regual python.
+2. 
+
+Postman: To construct HTTP packets, so we can test API during the whole development process
+
+Testing:
+1. Automated integrate test: when you make changes to your code, you can run these automated tests to verify that your code chages haven't broke any pre existing functionality.
+
+Deployment: 2 sceanrions
+1. Ubuntu : 
+	host on to Ubuntu machine that can be hosted on any cloud provider like AWS, GCP, Azure or even digital ocean
+	How to set nginx to act as reverse proxy
+	Will configure own D service
+	Will setup firewall to block all non HTTP traffic
+	Will set up SSL to allow HTTPS traffic.
+
+2. Heroku : 
+	Deploy on to Heroku
+	if you can't afford for cloud services or just don't have the ability to sign up for an account.
+	Heroku got nice free tier where we can deploy entore application for free, no sign up with credit cards
+
+Docker:
+CI/CD pipeline to migrate code
+
+
+-------------------
+Using framework FASTAPI. 
+	Fast API is not for model view controller type scenario.
+	Fast API is only for building API. which is fast and easy and qucick to spin up new API's
+	It has auto document functionality.
+
+Using Postgres SQL
+
+Project details:
+1. social media type app
+	User can 
+
+Development Setup:
+---------------------
+1. Install Python
+2. Instal VS Code
+3. Setup Virtual environment 
+	a. Comman to create a new env
+		py -3 -m venv <name of environment>
+	b. make sure interpretor is using venv and terminal is using virtual environment
+	c. activate your virtual environment
+		<venv_name>\scripts\activate
+4.install FastAPI 
+	go through tutorial docs
+	commands:
+		pip install fastapi[all]
+		pip freeze  --> to view dependencies installed
+	import Fast api as per offical website doc
+	run commands to initiate API on local
+		unicorn main: app
+		unicorn main: app --reload
+		unicorn foldername.main:app --relaod  (if the file is packaged into a folder)
+5. Setup Postman to test our API generated
+6. develop the logic in the VS code and will be automatically tested through Postman or the url
+7. Fast API has feature to build the documentation autmatically for the given url
+	rooturl/docs
+	rooturl/redoc
+
+Install Postgresql:
+----------------------
+1. https://www.postgresql.org/download/
+2. download the lastest through installer and run
+3. check the required sections mainly postgres server & admin. command line is optional.
+	Postgres Server
+	PGadmin GUI
+	Command line (optional)
+4. enter the password for superuser (Welcome@1234)
+5. Leave port 5432 as is
+6. Open PGadmin GUI , it will ask for master password for the first -  Welcome@1234 -->  Welcome1234
+7. Use psycopg2 driver to establish connection between python and postgresql
+---Installtion and code done----------
+
+
+8. we need a ORM (object relational mapper) to build the queries from python code with out SQL, SQlAlchemy will be used in this example
+9. SQlAlchemy is one of the most popular in python world. Its is stand alone and no relation to FastAPI
+10. Pydantic model are used to define/validate the request body which are store in schemas.py file
+11. SQLAlchemy models are used to define database tables & columns which are store in models.py file
+
+12. Hashing:
+	a. we will be using python 
+
+13. Authnetication process(refer oauth2.py file)
+	a. we will be using JWT(JSON web token) method.
+	b. this can be handled through python-jose library from fastapi, documnetation can be found in offical website
+		i. pip install python-jose[cryptography]
+	c. the generate jwt can be verified in jwt.io website and decode the code to verify
+	d. Hashing: (refer utils.py file)
+		i. we should not password directly in db. we need to hash the password and store them in db
+		ii. to hash password we will be using passlib and Bcrypt from fastapi. 
+		iii. pip install passlib[bcrypt]
+14. sqlalchemy Limitation:
+	1. it will create tables as per below details if the table don't exists in db. 
+	2. If table already exists, then it will not make any changes
+	3. To achive this we need to use Alembic tool (kind of data migration tool)
+
+15.Alembic Installation:
+	pip install alembic ---> for intalltion
+	alembic init alembic 
+		--> for creating directory, only required for first time
+		--> this will create a seperate folder with required files
+		--> Modify alembic > env.py file 
+			>> target_metadata = Base.metadata as per project database.py file
+			>> config.set_main_option to dynamically get the db url	as per project database.py file
+	
+	alembic revision --help --> for details
+	alembic revision -m "message" --> this will create a version file to keep our code like Git
+	
+	--> to add changes
+		alembic upgrade <revisionnum> 
+		alembic upgrade +1 
+		alembic head
+	
+	--> to downgrade/revert the changes	
+		alembic downgrade -1 
+	
+	--> we make alembic to autogenerate script to creat/modify tables as per models.py
+	--> Alembic can automatically pull database models from sqlalchemy and generate proper tables 
+		alembic revision --autogenerate -m "message"
+		alembic updagrade head
+
+16. CORS -> Cross-Origin Resource Sharing
+	reeres the situations when a afrontend running in a browser has javascript code that communicates with a backend 
+	and the backend is in different "origin" then the frontend.
+
+	You can configure it in Fast API using CORS Middleware.
+	By doing this we can control the domains that can access our applications
+
+17. we need to make sure to record all the required packeges in a file. we can pip freeze command to autogenerate those into a file for us.
+    this can be stored in Git for team to verify
+	--> to create filr with required packages
+			pip freeze > requirement.txt 
+	--> to install packages required based on file
+			pip install -r requirements.txt
+
+18. GIT installation:
+------------------------------------
+download git bash from offial website and install it
+create a github account to store our code repository.
+	account: Krishna.kotapati@outlook.com
+	pwd: Codewithkrishna
+
+	run "git init" in vs code terminal to create a repository in the project
+
+	
+	
+
+	
