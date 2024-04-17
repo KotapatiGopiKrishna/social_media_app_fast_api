@@ -144,8 +144,6 @@ Install Postgresql:
 ------------------------------------
 download git bash from offial website and install it
 create a github account to store our code repository.
-	account: Krishna.kotapati@outlook.com
-	pwd: Codewithkrishna
 
 	run "git init" in vs code terminal to create a repository in the project
 	git add --all --> to add all files
