@@ -1,3 +1,5 @@
 __pycache__
-venv/
+social_media_api_venv/
 .env
+notes.txt
+Creds.txt

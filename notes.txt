@@ -148,6 +148,19 @@ create a github account to store our code repository.
 	pwd: Codewithkrishna
 
 	run "git init" in vs code terminal to create a repository in the project
+	git add --all --> to add all files
+	git commit
+
+
+19. Deployment Methods: Heroku
+-------------------------------------
+	Git installation is required before this
+	Setup heroku account
+		account: Krishna.kotapati@outlook.com
+		Authenticator for MFA
+		install Heroku CLI
+	verify by using below command in VS code terminal
+	heroku --version
 
 	
 	
