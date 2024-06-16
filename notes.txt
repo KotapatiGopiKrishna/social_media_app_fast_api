@@ -45,6 +45,7 @@ Development Setup:
 3. Setup Virtual environment 
 	a. Comman to create a new env
 		py -3 -m venv <name of environment>
+		py -3 -m venv venv
 	b. make sure interpretor is using venv and terminal is using virtual environment
 	c. activate your virtual environment
 		<venv_name>\scripts\activate
@@ -144,13 +145,15 @@ Install Postgresql:
 ------------------------------------
 download git bash from offial website and install it
 create a github account to store our code repository.
+	account: Krishna.kotapati@outlook.com
+	pwd: Codewithkrishna
 
 	run "git init" in vs code terminal to create a repository in the project
 	git add --all --> to add all files
 	git commit
 
 
-19. Deployment Methods: Heroku
+19. Deployment Methods: Heroku / ububtu
 -------------------------------------
 	Git installation is required before this
 	Setup heroku account
@@ -160,6 +163,58 @@ create a github account to store our code repository.
 	verify by using below command in VS code terminal
 	heroku --version
 
+	After installation login in your environment
+	Create a app 
+		heroku create [AppName] -- this global and unique
+		heroku create social_media_app_test_Krishna
+
+	not completed since free account is no longer avaialable
+
+20. Create a Docker Image
+----------------------------------------
+	create a Dockerfile(must be same name) in folder
+	provide details required to create a image in the file and save
+
+	run below command to create image
+		docker build -t social_media_app_fastapi .
+			docker run --> this will make us run miltiple commnds sequentially instead we can record those steps in a file and run docker compose
+	
+	create docker-compose.yml file and provide version and port details there, then run the below command
+	docker-compose up -d
+	
+	if docker is up and running then localhost:8000 should work
+	we don't need to run unicorn --- reload command to start the application. Starting docker takes care of this
+	
+	useful commands:
+		docker logs
+		docker ps
+		docker ps -a
+		docker image ls
+		docker-compose down --> to stop docker
+
+	
+	Application will work after switiching on Docker image, to make DB also work, DB Server need to be hosted and Turned ON.
+	
+	Created Docker Hub account with Gitlab credentials.
+	its free account, we can store the images in the repository
+
+	when we are dealing with diff env, we need diff compose files. starting dcoker with multiple compose is little diff than above.
+	we need to mention the file name in the command to pick the right one
+	docker-compose -f docker-compose-dev.yml up -d
+	docker-compose -f docker-compose-dev.yml down
+
+21. Testing--->		
+-------------------
+
+	Using pytest for testing your application
+	All the files name should start with "test" and function names inside as well. Otherwise pytest may not detect
+	Commands used:
+		pytest test_calculations.py
+		pytest -v
+		pytest -v -s
+
+	FastAPI automatically provides us a test Client for testing.
+	we just need to import TestClient.
 	
 	
 
